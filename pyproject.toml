@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68", "setuptools-scm>=8"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "pdf-timetable-gen"
+version = "0.1.0"
+description = "Generate personalised study timetables from PDF syllabi — rule-based scoring + optional any-LLM AI analysis"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Soham Bhagat", email = "sohampbhagat@gmail.com" }]
+keywords = ["pdf", "timetable", "study", "syllabus", "cli", "education"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "pypdf>=4.0",
+    "python-docx>=1.0",
+    "typer>=0.9",
+    "rich>=13.0",
+    "httpx>=0.27",
+    "icalendar>=5.0",
+    "jinja2>=3.1",
+    "pydantic>=2.0",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.4",
+    "mypy>=1.9",
+]
+
+[project.scripts]
+pdf-timetable-gen = "pdf_timetable_gen.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/SohamPBhagat/pdf-timetable-gen"
+Repository = "https://github.com/SohamPBhagat/pdf-timetable-gen"
+Issues = "https://github.com/SohamPBhagat/pdf-timetable-gen"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pdf_timetable_gen*"]
+
+[tool.setuptools.package-data]
+pdf_timetable_gen = ["templates/*.html"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
