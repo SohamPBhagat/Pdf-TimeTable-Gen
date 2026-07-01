@@ -10,7 +10,7 @@ from typing import Optional
 import typer
 from rich.console import Console
 from rich.panel import Panel
-from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
+from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 
 from .config import Settings
@@ -182,7 +182,7 @@ def generate(
     output_dir = Path(output)
     fmt_list = [f.strip().lower() for f in formats.split(",")]
 
-    console.print(f"\n[bold]Writing output files...[/bold]")
+    console.print("\n[bold]Writing output files...[/bold]")
     try:
         paths = write_all(schedule, output_dir, name)
         for fmt in ["docx", "md", "ics", "html"]:
@@ -206,7 +206,6 @@ def doctor() -> None:
     """Check system health and dependencies."""
     console.print(Panel.fit("[bold cyan]pdf-timetable-gen health check[/bold cyan]", border_style="cyan"))
 
-    import sys
     console.print(f"  Python: {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
 
     deps = {
@@ -227,9 +226,9 @@ def doctor() -> None:
     if llm.is_configured:
         console.print(f"  [green]✓[/green] LLM: {llm.model} @ {llm.base_url}")
     else:
-        console.print(f"  [dim]○ LLM: not configured (rule-based scoring active)[/dim]")
+        console.print("  [dim]○ LLM: not configured (rule-based scoring active)[/dim]")
 
-    console.print(f"\n[bold green]System healthy![/bold green]")
+    console.print("\n[bold green]System healthy![/bold green]")
 
 
 def main():

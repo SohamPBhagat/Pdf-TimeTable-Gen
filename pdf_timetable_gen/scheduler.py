@@ -6,7 +6,6 @@ import logging
 import random
 from dataclasses import dataclass, field
 from datetime import date, timedelta
-from typing import Sequence
 
 from .constraint import PhaseGrouping, StudyConstraints
 from .extractor import Chapter, Topic
@@ -103,7 +102,6 @@ class ScheduleGenerator:
         # Build the schedule
         days: list[DayPlan] = []
         topic_queue = _prioritize_topics(all_topics)
-        total_slots = sum(len(c.topics) for c in chapters)
 
         for day_idx in range(constraints.total_days):
             weekday = (self.start_date.weekday() + day_idx) % 7

@@ -21,24 +21,24 @@ def write(schedule, path: str | Path) -> Path:
     """
     path = Path(path)
     lines = [
-        f"# Study Timetable",
-        f"",
+        "# Study Timetable",
+        "",
         f"**Generated:** {date.today().strftime('%Y-%m-%d')}  ",
         f"**Total Days:** {len(schedule.days)}  ",
         f"**Total Topics:** {schedule.total_topics}  ",
         f"**Total Hours:** {schedule.total_hours:.1f}  ",
         f"**Constraint:** {schedule.constraints}",
-        f"",
-        f"---",
-        f"",
+        "",
+        "---",
+        "",
     ]
 
     for day in schedule.days:
         date_str = day.date.strftime("%Y-%m-%d (%a)") if day.date else f"Day {day.day_number}"
         lines.append(f"## Day {day.day_number} — {date_str}")
-        lines.append(f"")
-        lines.append(f"| Time | Phase | Topic | Hours |")
-        lines.append(f"|------|-------|-------|-------|")
+        lines.append("")
+        lines.append("| Time | Phase | Topic | Hours |")
+        lines.append("|------|-------|-------|-------|")
 
         hour_cursor = 9.0  # assume 9 AM start
         for slot in day.slots:
@@ -51,11 +51,11 @@ def write(schedule, path: str | Path) -> Path:
             )
             hour_cursor += slot.hours
 
-        lines.append(f"")
+        lines.append("")
         lines.append(f"**Total:** {day.total_hours:.1f} hours")
-        lines.append(f"")
-        lines.append(f"---")
-        lines.append(f"")
+        lines.append("")
+        lines.append("---")
+        lines.append("")
 
     path.write_text("\n".join(lines), encoding="utf-8")
     logger.info("Wrote MD: %s (%d lines)", path, len(lines))

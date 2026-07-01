@@ -3,10 +3,9 @@
 from __future__ import annotations
 
 import logging
-from datetime import date, datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
-import icalendar
 from icalendar import Event, Calendar
 
 logger = logging.getLogger(__name__)
